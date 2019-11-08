@@ -1,5 +1,5 @@
 
-#rmyro - WeeWX driver for RM Young ResponseOne 92000 weather transmitters
+# RMYRO - WeeWX driver for RM Young ResponseOne 92000 weather transmitters
 
 Author: Andrew Billits
 
@@ -7,9 +7,7 @@ Derived from WX5x0 WeeWX driver by Mathew Wall:
 
 https://github.com/matthewwall/weewx-wxt5x0
 
-#Notes:
-
-#========================================================
+# Notes:
 
 1) This driver is compatible with ResponseOne 92000 weather transmitters only. ResponseOne 91000 (Wind Only) weather transmitters are not compatible.
 
@@ -32,20 +30,21 @@ Fast data reception is important for ResponseOne weather transmitters since they
 
 6) This driver auto-detects whether the rain bucket has been enabled.
 
-#Installation:
-#========================================================
+# Installation:
 Place rmyro.py into weewx user directory (ex: /usr/share/weewx/user)
 Modify your /etc/weewx/weewx.conf to use the rmyro driver by selecting:
 station-type = rmyro under [Station]:
-
+```
 [Station]
     ...
     # Set to type of station hardware. There must be a corresponding stanza
     # in this file with a 'driver' parameter indicating the driver to be used.
     station_type = rmyro
-
+```
 Add a section in the weewx.conf file for the rmyro driver, it should look similar to this (but modified as needed):
+```
 [rmyro]
     model = RM Young ResponseOne
     port = /dev/ttyUSB0
     driver = user.rmyro
+```
