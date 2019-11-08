@@ -1,12 +1,16 @@
 
 #rmyro - WeeWX driver for RM Young ResponseOne 92000 weather transmitters
+
 Author: Andrew Billits
 
 Derived from WX5x0 WeeWX driver by Mathew Wall:
+
 https://github.com/matthewwall/weewx-wxt5x0
 
 #Notes:
+
 #========================================================
+
 1) This driver is compatible with ResponseOne 92000 weather transmitters only. ResponseOne 91000 (Wind Only) weather transmitters are not compatible.
 
 2) The data transmitted from ResponseOne weather transmitters does not include units and similar information. Therefore this drivers assumes the weather transmitter is configured as follows:
