@@ -236,7 +236,19 @@ class Station(object):
         if len(parts) is 6 and '*' in parts[-1] and len(parts[0]) is 1:
             #parsed['address'] = float(parts[0])
             parsed['soilTemp1'] = float((float(parts[1])*41.67) -40) #For "Vegetronix VH400 Soil Temperature Sensor": C = (V * 41.67) - 40 OR F = (V * 75.006) - 40
-            parsed['soilMoist1'] = float(map_sensor_data(float(parts[2]), 0, 3.0, 0, 100)) #For "Vegetronix VH400 Soil Moisture Sensor": 0-3V = 0-100% OR
+            #parsed['soilMoist1'] = float(map_sensor_data(float(parts[2]), 0, 3.0, 0, 100)) #For "Vegetronix VH400 Soil Moisture Sensor": 0-3V = 0-100%
+            if float(parts[2]) <= 1.1: #https://www.vegetronix.com/Products/VH400/VH400-Piecewise-Curve.phtml
+                parsed['soilMoist1'] = (10*float(parts[2]))-1
+            if float(parts[2]) > 1.1 and float(parts[2]) <= 1.3:
+                parsed['soilMoist1'] = (25*float(parts[2]))-17.5
+            if float(parts[2]) > 1.3 and float(parts[2]) <= 1.82:
+                parsed['soilMoist1'] = (48.08*float(parts[2]))-47.5
+            if float(parts[2]) > 1.82 and float(parts[2]) <= 2.2:
+                parsed['soilMoist1'] = (26.32*float(parts[2]))-7.89
+            if float(parts[2]) > 2.2:
+                parsed['soilMoist1'] = (62.5*float(parts[2]))-87.5
+            if parsed['soilMoist1'] > 100: #max 100%
+                parsed['soilMoist1'] = 100
             parsed['UV'] = round(float(map_sensor_data(float(parts[3]), 0, 2.0, 0, 10)), 1) #For "Spectrum UV Light Sensor": UMol/m2 s = V * 100 - Very rough mapping to UV Index
             parsed['radiation'] = (float(parts[4]) * 500) * 0.86 #For "Spectrum Silicon Pyranometer": W/m2 = V * 500 - 0.86 is a calibration factor
             if math.floor(parsed['radiation']) < 2:
