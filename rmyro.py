@@ -237,7 +237,8 @@ class Station(object):
             #parsed['address'] = float(parts[0])
             parsed['soilTemp1'] = float((float(parts[1])*41.67) -40) #For "Vegetronix VH400 Soil Temperature Sensor": C = (V * 41.67) - 40 OR F = (V * 75.006) - 40
             #parsed['soilMoist1'] = float(map_sensor_data(float(parts[2]), 0, 3.0, 0, 100)) #For "Vegetronix VH400 Soil Moisture Sensor": 0-3V = 0-100%
-            if float(parts[2]) <= 1.1: #https://www.vegetronix.com/Products/VH400/VH400-Piecewise-Curve.phtml
+            #loginf("Soil moisture: %s" % float(parts[2]))
+            if float(parts[2]) <= 1.1: #For "Vegetronix VH400 Soil Moisture Sensor": https://www.vegetronix.com/Products/VH400/VH400-Piecewise-Curve.phtml
                 parsed['soilMoist1'] = (10*float(parts[2]))-1
             if float(parts[2]) > 1.1 and float(parts[2]) <= 1.3:
                 parsed['soilMoist1'] = (25*float(parts[2]))-17.5
